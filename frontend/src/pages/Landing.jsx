@@ -257,7 +257,7 @@ function SignUpModal({ onClose, onSuccess, onSwitchToLogin, onGoogleSignIn }) {
 }
 
 // ── Google Account Selection Modal ───────────────────────────────────────────
-function GoogleAccountModal({ onClose, onSuccess }) {
+function GoogleAccountModal({ onClose, onSuccess, onUseAnotherAccount }) {
   const accounts = [
     { name: 'Ethan Foster', email: 'ethan.foster@gmail.com', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop' },
     { name: 'Ethan Foster (Work)', email: 'ethan.work@company.com', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop' }
@@ -292,7 +292,10 @@ function GoogleAccountModal({ onClose, onSuccess }) {
             </button>
           ))}
           <button 
-            onClick={() => onSuccess(accounts[0])}
+            onClick={() => {
+              onClose();
+              if (onUseAnotherAccount) onUseAnotherAccount();
+            }}
             className="w-full flex items-center gap-4 px-4 py-3 hover:bg-slate-50 transition-colors rounded-lg text-left"
           >
             <div className="w-10 h-10 rounded-full border border-slate-300 flex items-center justify-center text-slate-500">
@@ -487,6 +490,7 @@ export default function Landing({ onLogin, onNavigate }) {
         <GoogleAccountModal
           onClose={close}
           onSuccess={handleLoginSuccess}
+          onUseAnotherAccount={() => setModal('login')}
         />
       )}
       {policyType && (
