@@ -1,0 +1,11 @@
+{
+  "name": "grow-athlete-root",
+  "version": "1.0.0",
+  "description": "Root wrapper for GrowAthlete monorepo",
+  "scripts": {
+    "dev": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "preview": "npm run preview --prefix frontend",
+    "install-all": "npm install --prefix frontend && npm install --prefix backend"
+  }
+}
